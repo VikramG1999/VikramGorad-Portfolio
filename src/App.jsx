@@ -1,22 +1,24 @@
-import About from "./About";
-import Contact from "./Contact";
+import React, { Suspense, lazy } from 'react';
 import Navbar from "./Navbar";
-import Projects from "./Projects";
-import Resume from "./Resume";
-import Skills from "./Skills";
 
-
+// Lazy load the sections
+const About = lazy(() => import("./About"));
+const Projects = lazy(() => import("./Projects"));
+const Skills = lazy(() => import("./Skills"));
+const Resume = lazy(() => import("./Resume"));
+const Contact = lazy(() => import("./Contact"));
 
 export default function App() {
   return (
     <>
       <Navbar />
-      <About />
-      <Projects />
-      <Skills />
-      <Resume />
-      <Contact />
-      
+      <Suspense fallback={<div>Loading...</div>}>
+        <About />
+        <Projects />
+        <Skills />
+        <Resume />
+        <Contact />
+      </Suspense>
     </>
   );
 }
